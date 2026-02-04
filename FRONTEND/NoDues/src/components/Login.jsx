@@ -1,6 +1,7 @@
 import { useState } from "react";
 import bg from "../assets/center-plaza.png";
 import logo from "../assets/LNMIIT_logo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [role, setRole] = useState("");
@@ -21,10 +22,12 @@ export default function Login() {
   { label: "Admin", value: "admin" },
 ];
 
-
+const navigate = useNavigate();
   const handleGoogleLogin = () => {
     // UI only (no auth yet)
-    alert(`Selected role: ${role}\n(Next: connect Google login)`);
+    // alert(`Selected role: ${role}\n(Next: connect Google login)`);
+    if (!role) return;
+    navigate(`/${role}`);
   };
 
   const isRoleSelected = role !== "";
