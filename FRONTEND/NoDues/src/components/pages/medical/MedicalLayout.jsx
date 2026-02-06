@@ -76,7 +76,7 @@ export default function MedicalLayout() {
 
   return (
     <div className="min-h-screen bg-neutral-900 text-white">
-      <Header role="medical" />
+      <Header role="medical" pendingCount={pending.length}/>
 
       <main className="mx-auto max-w-7xl px-6 py-8">
         <Outlet

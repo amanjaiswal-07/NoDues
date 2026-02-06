@@ -24,7 +24,7 @@ const ROLE_TITLES = {
   student: "Student",
 };
 
-export default function Header({ role }) {
+export default function Header({ role , pendingCount = 0}) {
   const navigate = useNavigate();
   const basePath = `/${role}`;
   const title = ROLE_TITLES[role] || role;
@@ -54,10 +54,23 @@ export default function Header({ role }) {
 
         {/* Center */}
         <div className="flex items-center gap-4">
-          <NavLink to={`${basePath}/pending`} className={navClass}>
+          {/* <NavLink to={`${basePath}/pending`} className={navClass}>
             <ClockIcon className="h-5 w-5" />
             Pending Requests
+          </NavLink> */}
+          <NavLink to={`${basePath}/pending`} className={navClass}>
+            <span className="relative inline-flex items-center gap-2">
+              <ClockIcon className="h-5 w-5" />
+              Pending Requests
+
+              {pendingCount > 0 && (
+                <span className="absolute -right-3 -top-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-blue-600 px-1 text-[11px] font-semibold text-white">
+                  {pendingCount}
+                </span>
+             )}
+            </span>
           </NavLink>
+
 
           <NavLink to={`${basePath}/approved`} className={navClass}>
             <CheckCircleIcon className="h-5 w-5" />
