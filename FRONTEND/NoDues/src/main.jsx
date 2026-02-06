@@ -22,6 +22,12 @@ import StoreHome from "./components/pages/store/StoreHome.jsx";
 import StorePending from "./components/pages/store/StorePending.jsx";
 import StoreApproved from "./components/pages/store/StoreApproved.jsx";
 import StoreRejected from "./components/pages/store/StoreRejected.jsx";
+//administration imports
+import AdministrationLayout from "./components/pages/administration/AdministrationLayout.jsx";
+import AdministrationHome from "./components/pages/administration/AdministrationHome.jsx";
+import AdministrationPending from "./components/pages/administration/AdministrationPending.jsx";
+import AdministrationApproved from "./components/pages/administration/AdministrationApproved.jsx";
+import AdministrationRejected from "./components/pages/administration/AdministrationRejected.jsx";
 
 
 // import Layout from "./Layout.jsx";
@@ -55,6 +61,13 @@ const router = createBrowserRouter(
         <Route path="pending" element={<StorePending />} />
         <Route path="approved" element={<StoreApproved />} />
         <Route path="rejected" element={<StoreRejected />} />
+      </Route>
+
+      <Route path="administration" element={<AdministrationLayout />}>
+        <Route index element={<AdministrationHome />} />
+        <Route path="pending" element={<AdministrationPending />} />
+        <Route path="approved" element={<AdministrationApproved />} />
+        <Route path="rejected" element={<AdministrationRejected />} />
       </Route>
 
     </Route>
