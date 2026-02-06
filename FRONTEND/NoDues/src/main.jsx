@@ -34,6 +34,12 @@ import NadHome from "./components/pages/nad/NadHome.jsx";
 import NadPending from "./components/pages/nad/NadPending.jsx";
 import NadApproved from "./components/pages/nad/NadApproved.jsx";
 import NadRejected from "./components/pages/nad/NadRejected.jsx";
+//accounts imports
+import AccountsLayout from "./components/pages/accounts/AccountsLayout.jsx";
+import AccountsHome from "./components/pages/accounts/AccountsHome.jsx";
+import AccountsPending from "./components/pages/accounts/AccountsPending.jsx";
+import AccountsApproved from "./components/pages/accounts/AccountsApproved.jsx";
+import AccountsRejected from "./components/pages/accounts/AccountsRejected.jsx";
 
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
@@ -80,6 +86,13 @@ const router = createBrowserRouter(
         <Route path="pending" element={<NadPending />} />
         <Route path="approved" element={<NadApproved />} />
         <Route path="rejected" element={<NadRejected />} />
+      </Route>
+
+      <Route path="accounts" element={<AccountsLayout />}>
+        <Route index element={<AccountsHome />} />
+        <Route path="pending" element={<AccountsPending />} />
+        <Route path="approved" element={<AccountsApproved />} />
+        <Route path="rejected" element={<AccountsRejected />} />
       </Route>
 
 
