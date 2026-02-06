@@ -28,7 +28,12 @@ import AdministrationHome from "./components/pages/administration/Administration
 import AdministrationPending from "./components/pages/administration/AdministrationPending.jsx";
 import AdministrationApproved from "./components/pages/administration/AdministrationApproved.jsx";
 import AdministrationRejected from "./components/pages/administration/AdministrationRejected.jsx";
-
+//nad cell imports
+import NadLayout from "./components/pages/nad/NadLayout.jsx";
+import NadHome from "./components/pages/nad/NadHome.jsx";
+import NadPending from "./components/pages/nad/NadPending.jsx";
+import NadApproved from "./components/pages/nad/NadApproved.jsx";
+import NadRejected from "./components/pages/nad/NadRejected.jsx";
 
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
@@ -69,6 +74,14 @@ const router = createBrowserRouter(
         <Route path="approved" element={<AdministrationApproved />} />
         <Route path="rejected" element={<AdministrationRejected />} />
       </Route>
+
+      <Route path="nad" element={<NadLayout />}>
+        <Route index element={<NadHome />} />
+        <Route path="pending" element={<NadPending />} />
+        <Route path="approved" element={<NadApproved />} />
+        <Route path="rejected" element={<NadRejected />} />
+      </Route>
+
 
     </Route>
   )
