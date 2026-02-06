@@ -16,6 +16,12 @@ import SportsHome from "./components/pages/sports/SportsHome.jsx";
 import SportsPending from "./components/pages/sports/SportsPending.jsx";
 import SportsApproved from "./components/pages/sports/SportsApproved.jsx";
 import SportsRejected from "./components/pages/sports/SportsRejected.jsx";
+//store imports
+import StoreLayout from "./components/pages/store/StoreLayout.jsx";
+import StoreHome from "./components/pages/store/StoreHome.jsx";
+import StorePending from "./components/pages/store/StorePending.jsx";
+import StoreApproved from "./components/pages/store/StoreApproved.jsx";
+import StoreRejected from "./components/pages/store/StoreRejected.jsx";
 
 
 // import Layout from "./Layout.jsx";
@@ -42,6 +48,13 @@ const router = createBrowserRouter(
         <Route path="pending" element={<SportsPending />} />
         <Route path="approved" element={<SportsApproved />} />
         <Route path="rejected" element={<SportsRejected />} />
+      </Route>
+
+      <Route path="store" element={<StoreLayout />}>
+        <Route index element={<StoreHome />} />
+        <Route path="pending" element={<StorePending />} />
+        <Route path="approved" element={<StoreApproved />} />
+        <Route path="rejected" element={<StoreRejected />} />
       </Route>
 
     </Route>
