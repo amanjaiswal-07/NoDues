@@ -10,6 +10,7 @@ export const initialPendingStudents = [
     email: "23UEC513@lnmiit.ac.in",
     phone: "7366973726",
     idCard: amanId,
+    hostel: "BH3",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const initialPendingStudents = [
     email: "23UEC587@lnmiit.ac.in",
     phone: "9462474094",
     idCard: parthId,
+    hostel: "BH1",
   },
   {
     id: 3,
@@ -26,5 +28,6 @@ export const initialPendingStudents = [
     email: "23UCS719@lnmiit.ac.in",
     phone: "8233844269",
     idCard: sujalId,
+    hostel: "GH",
   },
 ];

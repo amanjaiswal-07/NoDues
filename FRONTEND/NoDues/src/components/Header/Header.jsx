@@ -24,7 +24,7 @@ const ROLE_TITLES = {
   student: "Student",
 };
 
-export default function Header({ role , pendingCount = 0}) {
+export default function Header({ role , pendingCount = 0 , subTitle = "" }) {
   const navigate = useNavigate();
   const basePath = `/${role}`;
   const title = ROLE_TITLES[role] || role;
@@ -49,7 +49,10 @@ export default function Header({ role , pendingCount = 0}) {
           <div className="rounded-lg bg-white p-2">
             <img src={logo} alt="LNMIIT" className="h-8 w-auto" />
           </div>
-          <span className="text-lg font-semibold text-white">{title}</span>
+          <span className="text-lg font-semibold text-white">
+            {title}
+            {subTitle ? <span className="text-white/70"> - {subTitle}</span> : null}
+          </span>
         </Link>
 
         {/* Center */}

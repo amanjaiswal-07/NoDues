@@ -40,6 +40,12 @@ import AccountsHome from "./components/pages/accounts/AccountsHome.jsx";
 import AccountsPending from "./components/pages/accounts/AccountsPending.jsx";
 import AccountsApproved from "./components/pages/accounts/AccountsApproved.jsx";
 import AccountsRejected from "./components/pages/accounts/AccountsRejected.jsx";
+//warden imports
+import WardenLayout from "./components/pages/warden/WardenLayout.jsx";
+import WardenHome from "./components/pages/warden/WardenHome.jsx";
+import WardenPending from "./components/pages/warden/WardenPending.jsx";
+import WardenApproved from "./components/pages/warden/WardenApproved.jsx";
+import WardenRejected from "./components/pages/warden/WardenRejected.jsx";
 
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
@@ -95,6 +101,12 @@ const router = createBrowserRouter(
         <Route path="rejected" element={<AccountsRejected />} />
       </Route>
 
+      <Route path="warden" element={<WardenLayout />}>
+        <Route index element={<WardenHome />} />
+        <Route path="pending" element={<WardenPending />} />
+        <Route path="approved" element={<WardenApproved />} />
+        <Route path="rejected" element={<WardenRejected />} />
+      </Route>      
 
     </Route>
   )
