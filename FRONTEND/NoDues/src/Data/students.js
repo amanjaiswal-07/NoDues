@@ -1,6 +1,7 @@
 import amanId from "../assets/aman_id.jpeg";
 import parthId from "../assets/parth_id.jpeg";
 import sujalId from "../assets/sujal_id.png";
+import btpReport from "../assets/Presentation_D2D.pdf"; // NEW
 
 export const initialPendingStudents = [
   {
@@ -11,6 +12,10 @@ export const initialPendingStudents = [
     phone: "7366973726",
     idCard: amanId,
     hostel: "BH3",
+
+    // NEW (library fields)
+    rfidStatus: "verified",     // dummy: "verified" | "pending"
+    btpReportUrl: btpReport,    // same file for all
   },
   {
     id: 2,
@@ -20,6 +25,9 @@ export const initialPendingStudents = [
     phone: "9462474094",
     idCard: parthId,
     hostel: "BH1",
+
+    rfidStatus: "verified",
+    btpReportUrl: btpReport,
   },
   {
     id: 3,
@@ -29,5 +37,8 @@ export const initialPendingStudents = [
     phone: "8233844269",
     idCard: sujalId,
     hostel: "GH",
+
+    rfidStatus: "pending",
+    btpReportUrl: btpReport,
   },
 ];

@@ -4,6 +4,7 @@ export default function DepartmentHome({ deptName , pendingCount = 0}) {
       <h1 className="text-3xl font-semibold">{deptName} Dashboard</h1>
       <p className="mt-2 text-white/70">
         View and manage {deptName.toLowerCase()} clearance requests.
+        {/* {subtitle || `View and manage ${deptName.toLowerCase()} clearance requests.`} */}
       </p>
 
       {/* ✅ pending count */}
