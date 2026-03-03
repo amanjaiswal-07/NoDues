@@ -8,11 +8,22 @@ export default function LibraryStaffSent() {
   const [viewOpen, setViewOpen] = useState(false);
   const [viewStudent, setViewStudent] = useState(null);
 
+  const badgeClass = (status) => {
+    if (status === "Approved by Librarian")
+      return "border-emerald-400/40 text-emerald-300 bg-emerald-500/10";
+    if (status === "Rejected by Librarian")
+      return "border-rose-400/40 text-rose-300 bg-rose-500/10";
+    return "border-white/20 text-white/80 bg-white/5"; // Pending by Librarian
+  };
+
+  const getStatus = (s) => s?.tracking?.status || "Pending by Librarian";
+  const getReason = (s) => s?.tracking?.librarianReason || "";
+
   return (
     <div className="mx-auto w-full max-w-7xl">
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-white">
-          Central Library - Staff | Sent to Librarian
+          Central Library - Staff | Move to Librarian
         </h1>
         <p className="mt-1 text-sm text-white/60">
           Requests forwarded to Librarian for final approval.
@@ -37,13 +48,21 @@ export default function LibraryStaffSent() {
               <div className="min-w-[260px] flex-1 text-white/70">{s.email}</div>
 
               <div className="ml-auto flex shrink-0 items-center gap-3">
+                {/* Status badge */}
+                <span
+                  className={`rounded-xl border px-3 py-2 text-xs font-semibold ${badgeClass(
+                    getStatus(s)
+                  )}`}
+                >
+                  {getStatus(s)}
+                </span>
+
                 <button
                   type="button"
                   onClick={() => {
                     setViewStudent(s);
                     setViewOpen(true);
                   }}
-
                   className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2 text-sm font-medium text-white/90 hover:bg-white/10"
                 >
                   <EyeIcon className="h-5 w-5" />
@@ -58,7 +77,9 @@ export default function LibraryStaffSent() {
       <ViewDetailsModal
         open={viewOpen}
         student={viewStudent}
-        status="pending"
+        // pass the real tracking status + reason
+        status={viewStudent ? getStatus(viewStudent) : "Pending by Librarian"}
+        rejectionReason={viewStudent ? getReason(viewStudent) : ""}
         showLibraryFields={true}
         onClose={() => {
           setViewOpen(false);

@@ -2,36 +2,24 @@ import { useMemo, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import PendingRequests from "../../Request/PendingRequests";
 import ConfirmModal from "../../Modal/ConfirmModal";
-import PartiallyAcceptedModal from "../../Modal/PartiallyAcceptedModal";
 import RejectModal from "../../Modal/RejectModal";
 import ViewDetailsModal from "../../Modal/ViewDetailsModal";
 
 export default function LibraryStaffPendingPage() {
-  const {
-    staffPending,
-    moveToLibrarian,
-    moveToPartial,
-    pendingMoveToRejected, // NEW from layout
-  } = useOutletContext();
+  const { staffPending, moveToLibrarian, pendingMoveToRejected } =
+    useOutletContext();
 
   // Move to librarian confirm
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  // Partial modal
-  const [partialOpen, setPartialOpen] = useState(false);
-  const [partialSelected, setPartialSelected] = useState(null);
-
   // Reject modal
   const [rejectOpen, setRejectOpen] = useState(false);
   const [rejectSelected, setRejectSelected] = useState(null);
 
-  //view details modal
+  // View details modal
   const [viewOpen, setViewOpen] = useState(false);
   const [viewStudent, setViewStudent] = useState(null);
-  const [viewStatus, setViewStatus] = useState("pending");
-  const [viewRejectReason, setViewRejectReason] = useState("");
-
 
   const title = useMemo(() => "Central Library - Staff | Pending Requests", []);
 
@@ -47,18 +35,6 @@ export default function LibraryStaffPendingPage() {
     setSelected(null);
   };
 
-  // Extra button -> Partially Accepted
-  const handlePartialClick = (student) => {
-    setPartialSelected(student);
-    setPartialOpen(true);
-  };
-
-  const handleConfirmPartial = (payload) => {
-    if (partialSelected) moveToPartial(partialSelected, payload);
-    setPartialOpen(false);
-    setPartialSelected(null);
-  };
-
   // Reject button -> open RejectModal
   const handleRejectClick = (student) => {
     setRejectSelected(student);
@@ -66,12 +42,10 @@ export default function LibraryStaffPendingPage() {
   };
 
   const handleConfirmReject = (finalReason) => {
-    // finalReason already includes details because we enforce text mandatory
     if (rejectSelected) pendingMoveToRejected(rejectSelected, finalReason);
     setRejectOpen(false);
     setRejectSelected(null);
   };
-  
 
   // Library reject reasons (details mandatory)
   const LIB_REJECT_REASONS = [
@@ -87,26 +61,22 @@ export default function LibraryStaffPendingPage() {
       <PendingRequests
         title={title}
         data={staffPending}
-        // 1) Approve -> Move to Librarian
+        // Approve -> Move to Librarian
         showApprove={true}
         approveLabel="Move to Librarian"
         approveIcon="send"
         onApprove={handleMoveClick}
-        // 2) Extra -> Partially Accepted
-        extraActionLabel="Partially Accepted"
-        onExtraAction={handlePartialClick}
-        // 3) Reject -> Reject
+        // Remove extra action button (Partial)
+        extraActionLabel=""
+        // Reject
         showReject={true}
         rejectLabel="Reject"
         onReject={handleRejectClick}
-        // 4) View details
+        // View details
         onView={(s) => {
           setViewStudent(s);
-          setViewStatus("pending");
-          setViewRejectReason("");
           setViewOpen(true);
         }}
-
       />
 
       {/* Confirm: Send to Librarian */}
@@ -127,17 +97,6 @@ export default function LibraryStaffPendingPage() {
         onConfirm={handleConfirmMove}
       />
 
-      {/* Partially Accepted modal */}
-      <PartiallyAcceptedModal
-        open={partialOpen}
-        student={partialSelected}
-        onClose={() => {
-          setPartialOpen(false);
-          setPartialSelected(null);
-        }}
-        onConfirm={handleConfirmPartial}
-      />
-
       {/* Reject modal (Pending -> Rejected) */}
       <RejectModal
         open={rejectOpen}
@@ -153,18 +112,17 @@ export default function LibraryStaffPendingPage() {
         placeholder="Write details (mandatory)..."
       />
 
+      {/* View details */}
       <ViewDetailsModal
         open={viewOpen}
         student={viewStudent}
-        status={viewStatus}
-        rejectionReason={viewRejectReason}
+        status="pending"
         showLibraryFields={true}
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);
         }}
       />
-
     </>
   );
 }

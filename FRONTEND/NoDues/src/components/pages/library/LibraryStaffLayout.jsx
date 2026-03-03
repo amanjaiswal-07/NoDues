@@ -5,53 +5,26 @@ import { initialPendingStudents } from "../../../Data/students";
 
 export default function LibraryStaffLayout() {
   const [staffPending, setStaffPending] = useState(initialPendingStudents);
-  const [staffSent, setStaffSent] = useState([]); // Sent to Librarian list
-  const [staffPartial, setStaffPartial] = useState([]); // Partially Accepted
+  const [staffSent, setStaffSent] = useState([]); // Move to Librarian (tracking)
   const [staffRejected, setStaffRejected] = useState([]);
+
   const getKey = (s) => s?.id ?? s?.roll;
 
+  // Pending -> Move to Librarian (tracking status added)
   const moveToLibrarian = (student) => {
     const key = getKey(student);
 
-    setStaffPending((prev) => prev.filter((x) => getKey(x) !== key));
-    setStaffSent((prev) => [student, ...prev.filter((x) => getKey(x) !== key)]);
-  };
-
-  const moveToPartial = (student, payload) => {
-    const key = getKey(student);
-
     const record = {
       ...student,
-      partial: {
-        reason: payload.reason,
-        details: payload.details,
-        at: new Date().toISOString(),
+      tracking: {
+        status: "Pending by Librarian", // default when forwarded
+        updatedAt: new Date().toISOString(),
+        librarianReason: "", // if later rejected by librarian
       },
     };
 
     setStaffPending((prev) => prev.filter((x) => getKey(x) !== key));
-    setStaffPartial((prev) => [record, ...prev.filter((x) => getKey(x) !== key)]);
-  };
-
-  const partialSendToLibrarian = (student) => {
-    const key = getKey(student);
-    setStaffPartial((prev) => prev.filter((x) => getKey(x) !== key));
-    setStaffSent((prev) => [student, ...prev.filter((x) => getKey(x) !== key)]);
-  };
-
-  // NEW: Partial -> Rejected (store reason string)
-  const partialMoveToRejected = (student, finalReason) => {
-    const key = getKey(student);
-    const record = {
-      ...student,
-      rejected: {
-        reason: finalReason,
-        at: new Date().toISOString(),
-      },
-    };
-
-    setStaffPartial((prev) => prev.filter((x) => getKey(x) !== key));
-    setStaffRejected((prev) => [record, ...prev.filter((x) => getKey(x) !== key)]);
+    setStaffSent((prev) => [record, ...prev.filter((x) => getKey(x) !== key)]);
   };
 
   // Pending -> Rejected (store reason string)
@@ -70,7 +43,25 @@ export default function LibraryStaffLayout() {
     setStaffRejected((prev) => [record, ...prev.filter((x) => getKey(x) !== key)]);
   };
 
-
+  // (For future) librarian will update tracking status in staffSent
+  // Example use later:
+  // updateSentTracking(studentKey, { status: "Approved by Librarian", librarianReason: "" })
+  const updateSentTracking = (studentKey, updates) => {
+    setStaffSent((prev) =>
+      prev.map((x) =>
+        getKey(x) === studentKey
+          ? {
+              ...x,
+              tracking: {
+                ...(x.tracking || {}),
+                ...updates,
+                updatedAt: new Date().toISOString(),
+              },
+            }
+          : x
+      )
+    );
+  };
 
   return (
     <div className="min-h-screen bg-neutral-900">
@@ -81,19 +72,18 @@ export default function LibraryStaffLayout() {
           context={{
             staffPending,
             staffSent,
-            staffPartial,
             staffRejected,
 
             moveToLibrarian,
-            moveToPartial,
-            partialSendToLibrarian,
-            partialMoveToRejected,
+            pendingMoveToRejected,
 
+            // expose this for librarian integration later
+            updateSentTracking,
+
+            // setters if you still need them
             setStaffPending,
             setStaffSent,
-            setStaffPartial,
             setStaffRejected,
-            pendingMoveToRejected,
           }}
         />
       </main>

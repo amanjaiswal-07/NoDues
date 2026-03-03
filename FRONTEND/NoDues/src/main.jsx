@@ -50,7 +50,7 @@ import WardenRejected from "./components/pages/warden/WardenRejected.jsx";
 import LibraryStaffHome from './components/pages/library/LibraryStaffHome.jsx'
 import LibraryStaffLayout from "./components/pages/library/LibraryStaffLayout.jsx";
 import LibraryStaffPending from "./components/pages/library/LibraryStaffPending.jsx";
-import LibraryStaffPartial from "./components/pages/library/LibraryStaffPartial.jsx";
+// import LibraryStaffPartial from "./components/pages/library/LibraryStaffPartial.jsx";
 import LibraryStaffSent from "./components/pages/library/LibraryStaffSent.jsx";
 import LibraryStaffRejected from "./components/pages/library/LibraryStaffRejected.jsx"; 
 // import Layout from "./Layout.jsx";
@@ -117,7 +117,7 @@ const router = createBrowserRouter(
       <Route path="library/staff" element={<LibraryStaffLayout />}>
         <Route index element={<LibraryStaffHome />} /> {/* or StaffHome if you want */}
         <Route path="pending" element={<LibraryStaffPending />} />
-        <Route path="partial" element={<LibraryStaffPartial />} />
+        {/* <Route path="partial" element={<LibraryStaffPartial />} /> */}
         <Route path="sent" element={<LibraryStaffSent />} />
         <Route path="rejected" element={<LibraryStaffRejected />} />
       </Route>
