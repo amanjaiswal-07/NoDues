@@ -2,7 +2,8 @@ import amanId from "../assets/aman_id.jpeg";
 import parthId from "../assets/parth_id.jpeg";
 import sujalId from "../assets/sujal_id.png";
 import btpReport from "../assets/Presentation_D2D.pdf"; // NEW
-
+import declarationForm from "../assets/Declaration Form.pdf";
+import offerLetter from "../assets/Offer Letter.pdf";
 export const initialPendingStudents = [
   {
     id: 1,
@@ -16,6 +17,13 @@ export const initialPendingStudents = [
     // NEW (library fields)
     rfidStatus: "verified",     // dummy: "verified" | "pending"
     btpReportUrl: btpReport,    // same file for all
+
+    placementStatus: "PLACED",
+    offerLetterUrl: offerLetter,
+    declarationUrl: null,
+    admissionLetterUrl: null,
+    examScorecardUrl: null,
+    emailSentDate: "2026-02-14",
   },
   {
     id: 2,
@@ -28,6 +36,13 @@ export const initialPendingStudents = [
 
     rfidStatus: "verified",
     btpReportUrl: btpReport,
+
+    placementStatus: "PREPARATION_BREAK",
+    offerLetterUrl: null,
+    declarationUrl: declarationForm,
+    admissionLetterUrl: null,
+    examScorecardUrl: null,
+    emailSentDate: "2026-02-10",
   },
   {
     id: 3,
@@ -40,5 +55,12 @@ export const initialPendingStudents = [
 
     rfidStatus: "pending",
     btpReportUrl: btpReport,
+    
+    placementStatus: "HIGHER_STUDIES_ABROAD",
+    offerLetterUrl: null,
+    declarationUrl: null,
+    admissionLetterUrl: declarationForm, // dummy
+    examScorecardUrl: declarationForm,   // dummy
+    emailSentDate: "2026-02-12",
   },
 ];

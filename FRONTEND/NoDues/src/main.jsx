@@ -62,6 +62,12 @@ import LibraryLibrarianHome from "./components/pages/library/LibraryLibrarianHom
 import LibraryLibrarianPending from "./components/pages/library/LibraryLibrarianPending.jsx";
 import LibraryLibrarianApproved from "./components/pages/library/LibraryLibrarianApproved.jsx";
 import LibraryLibrarianRejected from "./components/pages/library/LibraryLibrarianRejected.jsx";
+//placement imports
+import PlacementLayout from "./components/pages/placement/PlacementLayout.jsx";
+import PlacementHome from "./components/pages/placement/PlacementHome.jsx";
+import PlacementPending from "./components/pages/placement/PlacementPending.jsx";
+import PlacementApproved from "./components/pages/placement/PlacementApproved.jsx";
+import PlacementRejected from "./components/pages/placement/PlacementRejected.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -142,6 +148,13 @@ const router = createBrowserRouter(
           <Route path="approved" element={<LibraryLibrarianApproved />} />
           <Route path="rejected" element={<LibraryLibrarianRejected />} />
         </Route>
+      </Route>
+
+      <Route path="placement" element={<PlacementLayout />}>
+        <Route index element={<PlacementHome />} />
+        <Route path="pending" element={<PlacementPending />} />
+        <Route path="approved" element={<PlacementApproved />} />
+        <Route path="rejected" element={<PlacementRejected />} />
       </Route>
 
        
