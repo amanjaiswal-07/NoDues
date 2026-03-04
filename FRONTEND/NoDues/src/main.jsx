@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import Login from './components/Login.jsx'
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from 'react-router-dom'
 // Medical imports
 import MedicalLayout from './components/pages/medical/MedicalLayout.jsx'
 import MedicalHome from "./components/pages/medical/MedicalHome.jsx";
@@ -47,12 +47,21 @@ import WardenPending from "./components/pages/warden/WardenPending.jsx";
 import WardenApproved from "./components/pages/warden/WardenApproved.jsx";
 import WardenRejected from "./components/pages/warden/WardenRejected.jsx";
 //library imports
-import LibraryStaffHome from './components/pages/library/LibraryStaffHome.jsx'
+import LibraryRootLayout from "./components/pages/library/LibraryRootLayout.jsx";
+
+// staff
 import LibraryStaffLayout from "./components/pages/library/LibraryStaffLayout.jsx";
+import LibraryStaffHome from "./components/pages/library/LibraryStaffHome.jsx";
 import LibraryStaffPending from "./components/pages/library/LibraryStaffPending.jsx";
-// import LibraryStaffPartial from "./components/pages/library/LibraryStaffPartial.jsx";
 import LibraryStaffSent from "./components/pages/library/LibraryStaffSent.jsx";
-import LibraryStaffRejected from "./components/pages/library/LibraryStaffRejected.jsx"; 
+import LibraryStaffRejected from "./components/pages/library/LibraryStaffRejected.jsx";
+
+// librarian
+import LibraryLibrarianLayout from "./components/pages/library/LibraryLibrarianLayout.jsx";
+import LibraryLibrarianHome from "./components/pages/library/LibraryLibrarianHome.jsx";
+import LibraryLibrarianPending from "./components/pages/library/LibraryLibrarianPending.jsx";
+import LibraryLibrarianApproved from "./components/pages/library/LibraryLibrarianApproved.jsx";
+import LibraryLibrarianRejected from "./components/pages/library/LibraryLibrarianRejected.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -114,12 +123,25 @@ const router = createBrowserRouter(
         <Route path="rejected" element={<WardenRejected />} />
       </Route>
 
-      <Route path="library/staff" element={<LibraryStaffLayout />}>
-        <Route index element={<LibraryStaffHome />} /> {/* or StaffHome if you want */}
-        <Route path="pending" element={<LibraryStaffPending />} />
-        {/* <Route path="partial" element={<LibraryStaffPartial />} /> */}
-        <Route path="sent" element={<LibraryStaffSent />} />
-        <Route path="rejected" element={<LibraryStaffRejected />} />
+      <Route path="library" element={<LibraryRootLayout />}>
+        {/* If user opens /library, push them to / (or you can choose /library/staff) */}
+        <Route index element={<Navigate to="/" replace />} />
+
+        {/* STAFF */}
+        <Route path="staff" element={<LibraryStaffLayout />}>
+          <Route index element={<LibraryStaffHome />} />
+          <Route path="pending" element={<LibraryStaffPending />} />
+          <Route path="sent" element={<LibraryStaffSent />} />
+          <Route path="rejected" element={<LibraryStaffRejected />} />
+        </Route>
+
+        {/* LIBRARIAN */}
+        <Route path="librarian" element={<LibraryLibrarianLayout />}>
+          <Route index element={<LibraryLibrarianHome />} />
+          <Route path="pending" element={<LibraryLibrarianPending />} />
+          <Route path="approved" element={<LibraryLibrarianApproved />} />
+          <Route path="rejected" element={<LibraryLibrarianRejected />} />
+        </Route>
       </Route>
 
        

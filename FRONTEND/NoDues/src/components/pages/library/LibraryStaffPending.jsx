@@ -6,8 +6,11 @@ import RejectModal from "../../Modal/RejectModal";
 import ViewDetailsModal from "../../Modal/ViewDetailsModal";
 
 export default function LibraryStaffPendingPage() {
-  const { staffPending, moveToLibrarian, pendingMoveToRejected } =
-    useOutletContext();
+  const {
+    staffPending,
+    staffMoveToLibrarian,
+    staffReject,
+  } = useOutletContext();
 
   // Move to librarian confirm
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -30,7 +33,7 @@ export default function LibraryStaffPendingPage() {
   };
 
   const handleConfirmMove = () => {
-    if (selected) moveToLibrarian(selected);
+    if (selected) staffMoveToLibrarian(selected);
     setConfirmOpen(false);
     setSelected(null);
   };
@@ -42,7 +45,7 @@ export default function LibraryStaffPendingPage() {
   };
 
   const handleConfirmReject = (finalReason) => {
-    if (rejectSelected) pendingMoveToRejected(rejectSelected, finalReason);
+    if (rejectSelected) staffReject(rejectSelected, finalReason);
     setRejectOpen(false);
     setRejectSelected(null);
   };
@@ -66,8 +69,6 @@ export default function LibraryStaffPendingPage() {
         approveLabel="Move to Librarian"
         approveIcon="send"
         onApprove={handleMoveClick}
-        // Remove extra action button (Partial)
-        extraActionLabel=""
         // Reject
         showReject={true}
         rejectLabel="Reject"
