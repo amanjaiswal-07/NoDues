@@ -68,6 +68,12 @@ import PlacementHome from "./components/pages/placement/PlacementHome.jsx";
 import PlacementPending from "./components/pages/placement/PlacementPending.jsx";
 import PlacementApproved from "./components/pages/placement/PlacementApproved.jsx";
 import PlacementRejected from "./components/pages/placement/PlacementRejected.jsx";
+// lucs imports
+import LUCSLayout from "./components/pages/LUCS/LUCSLayout.jsx";
+import LUCSHome from "./components/pages/LUCS/LUCSHome.jsx";
+import LUCSPending from "./components/pages/LUCS/LUCSPending.jsx";
+import LUCSApproved from "./components/pages/LUCS/LUCSApproved.jsx";
+import LUCSRejected from "./components/pages/LUCS/LUCSRejected.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -157,6 +163,12 @@ const router = createBrowserRouter(
         <Route path="rejected" element={<PlacementRejected />} />
       </Route>
 
+      <Route path="lucs" element={<LUCSLayout />}>
+        <Route index element={<LUCSHome />} />
+        <Route path="pending" element={<LUCSPending />} />
+        <Route path="approved" element={<LUCSApproved />} />
+        <Route path="rejected" element={<LUCSRejected />} />
+      </Route>
        
 
     </Route>
