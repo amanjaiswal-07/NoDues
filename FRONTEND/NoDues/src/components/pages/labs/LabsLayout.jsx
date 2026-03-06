@@ -19,6 +19,7 @@ const LABS_BY_DEPARTMENT = {
     "DSP Lab (Mr. Kushmakar Sharma)",
     "E-CAD Lab (Mr. Ajay Naresh)",
     "BE Lab (Mr. Pavan Sharma)",
+    "Final Approval for ECE (Mr. Kundan Shahi)"
   ],
 
   mech: [
