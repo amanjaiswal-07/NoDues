@@ -80,6 +80,12 @@ import LabsHome from "./components/pages/labs/LabsHome.jsx";
 import LabsPending from "./components/pages/labs/LabsPending.jsx";
 import LabsApproved from "./components/pages/labs/LabsApproved.jsx";
 import LabsRejected from "./components/pages/labs/LabsRejected.jsx";
+// hod imports
+import HODLayout from "./components/pages/HOD/HODLayout.jsx";
+import HODHome from "./components/pages/HOD/HODHome.jsx";
+import HODPending from "./components/pages/HOD/HODPending.jsx";
+import HODApproved from "./components/pages/HOD/HODApproved.jsx";
+import HODRejected from "./components/pages/HOD/HODRejected.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -181,6 +187,13 @@ const router = createBrowserRouter(
         <Route path="pending" element={<LabsPending />} />
         <Route path="approved" element={<LabsApproved />} />
         <Route path="rejected" element={<LabsRejected />} />
+      </Route>
+
+      <Route path="hod/:department" element={<HODLayout />}>
+        <Route index element={<HODHome />} />
+        <Route path="pending" element={<HODPending />} />
+        <Route path="approved" element={<HODApproved />} />
+        <Route path="rejected" element={<HODRejected />} />
       </Route>
        
 

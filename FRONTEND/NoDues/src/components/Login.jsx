@@ -193,6 +193,13 @@ export default function Login() {
     "librarian2@lnmiit.ac.in",
   ]);
 
+  const HOD_EMAIL_TO_DEPARTMENT = {
+    "hodece@lnmiit.ac.in": "ece",
+    "hodcce@lnmiit.ac.in": "cce",
+    "hodcse@lnmiit.ac.in": "cse",
+    "hodmech@lnmiit.ac.in": "mech",
+  };
+
   const handleGoogleLogin = () => {
     if (!role) return;
 
@@ -224,13 +231,25 @@ export default function Login() {
       navigate(`/labs/${labDepartment}`);
       return;
     }
+    // HOD special handling
+    if (role === "hod") {
+      const email = mockEmail.trim().toLowerCase();
+      const hodDepartment = HOD_EMAIL_TO_DEPARTMENT[email];
 
+      if (!hodDepartment) {
+        alert("Not authorized for HOD section.");
+        return;
+      }
+
+      navigate(`/hod/${hodDepartment}`);
+      return;
+    }
     // Other departments
     navigate(`/${role}`);
   };
 
   const isRoleSelected = role !== "";
-  const shouldShowLibraryEmail = role === "library";
+  const shouldShowEmailInput = role === "library" || role === "hod";
   const shouldShowLabDepartment = role === "labs";
 
   return (
@@ -307,7 +326,7 @@ export default function Login() {
           ) : null}
 
           {/* TEMP email input - only shown for library */}
-          {shouldShowLibraryEmail ? (
+          {shouldShowEmailInput ? (
             <div className="mt-4">
               <label className="block text-xs font-medium text-black/70">
                 (UI-only) Mock Google Email
