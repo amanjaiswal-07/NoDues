@@ -123,6 +123,7 @@ const ROLE_TITLES = {
   nad: "NAD Cell",
   admin: "Admin",
   student: "Student",
+  labs: "Labs"
 };
 
 export default function Header({

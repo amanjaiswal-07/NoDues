@@ -74,6 +74,12 @@ import LUCSHome from "./components/pages/LUCS/LUCSHome.jsx";
 import LUCSPending from "./components/pages/LUCS/LUCSPending.jsx";
 import LUCSApproved from "./components/pages/LUCS/LUCSApproved.jsx";
 import LUCSRejected from "./components/pages/LUCS/LUCSRejected.jsx";
+// labs imports
+import LabsLayout from "./components/pages/labs/LabsLayout.jsx";
+import LabsHome from "./components/pages/labs/LabsHome.jsx";
+import LabsPending from "./components/pages/labs/LabsPending.jsx";
+import LabsApproved from "./components/pages/labs/LabsApproved.jsx";
+import LabsRejected from "./components/pages/labs/LabsRejected.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -168,6 +174,13 @@ const router = createBrowserRouter(
         <Route path="pending" element={<LUCSPending />} />
         <Route path="approved" element={<LUCSApproved />} />
         <Route path="rejected" element={<LUCSRejected />} />
+      </Route>
+
+      <Route path="labs/:department" element={<LabsLayout />}>
+        <Route index element={<LabsHome />} />
+        <Route path="pending" element={<LabsPending />} />
+        <Route path="approved" element={<LabsApproved />} />
+        <Route path="rejected" element={<LabsRejected />} />
       </Route>
        
 

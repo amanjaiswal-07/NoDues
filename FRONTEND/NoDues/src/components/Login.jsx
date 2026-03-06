@@ -152,8 +152,10 @@ export default function Login() {
   const [role, setRole] = useState("");
 
   // TEMP (UI-only) - simulate the email returned by Google login
-  // Later: replace this with actual Google profile email from backend/auth
   const [mockEmail, setMockEmail] = useState("staff1@lnmiit.ac.in");
+
+  // NEW: for Labs role
+  const [labDepartment, setLabDepartment] = useState("");
 
   const roles = [
     { label: "Student", value: "student" },
@@ -168,12 +170,19 @@ export default function Login() {
     { label: "Medical Unit", value: "medical" },
     { label: "Placement Office", value: "placement" },
     { label: "NAD Cell", value: "nad" },
+    { label: "Labs", value: "labs" },
     { label: "Admin", value: "admin" },
+  ];
+
+  const LAB_DEPARTMENTS = [
+    { label: "CSE / CCE", value: "cse-cce" },
+    { label: "ECE / CCE", value: "ece-cce" },
+    { label: "Mechanical", value: "mech" },
+    { label: "Physics", value: "physics" },
   ];
 
   const navigate = useNavigate();
 
-  // TEMP whitelist mapping (UI-only)
   const LIBRARY_STAFF_EMAILS = new Set([
     "staff1@lnmiit.ac.in",
     "staff2@lnmiit.ac.in",
@@ -205,11 +214,24 @@ export default function Login() {
       return;
     }
 
-    // Other departments (same as before)
+    // Labs special handling
+    if (role === "labs") {
+      if (!labDepartment) {
+        alert("Please select lab department.");
+        return;
+      }
+
+      navigate(`/labs/${labDepartment}`);
+      return;
+    }
+
+    // Other departments
     navigate(`/${role}`);
   };
 
   const isRoleSelected = role !== "";
+  const shouldShowLibraryEmail = role === "library";
+  const shouldShowLabDepartment = role === "labs";
 
   return (
     <div className="min-h-screen relative flex items-center justify-center">
@@ -243,9 +265,13 @@ export default function Login() {
           <div className="mt-8">
             <select
               value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className={`w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-sm outline-none focus:border-black/40
-                ${!isRoleSelected ? "text-black/50" : "text-black"}`}
+              onChange={(e) => {
+                setRole(e.target.value);
+                setLabDepartment("");
+              }}
+              className={`w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-sm outline-none focus:border-black/40 ${
+                !isRoleSelected ? "text-black/50" : "text-black"
+              }`}
             >
               <option value="" disabled hidden>
                 Select role:-
@@ -259,8 +285,29 @@ export default function Login() {
             </select>
           </div>
 
+          {/* Labs department select */}
+          {shouldShowLabDepartment ? (
+            <div className="mt-4">
+              <label className="block text-xs font-medium text-black/70">
+                Select Lab Department
+              </label>
+              <select
+                value={labDepartment}
+                onChange={(e) => setLabDepartment(e.target.value)}
+                className="mt-2 w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-sm outline-none focus:border-black/40 text-black"
+              >
+                <option value="">-- Select Department --</option>
+                {LAB_DEPARTMENTS.map((d) => (
+                  <option key={d.value} value={d.value}>
+                    {d.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : null}
+
           {/* TEMP email input - only shown for library */}
-          {role === "library" ? (
+          {shouldShowLibraryEmail ? (
             <div className="mt-4">
               <label className="block text-xs font-medium text-black/70">
                 (UI-only) Mock Google Email
@@ -281,8 +328,11 @@ export default function Login() {
           <button
             onClick={handleGoogleLogin}
             disabled={!isRoleSelected}
-            className={`mt-4 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-sm active:scale-[0.99]
-              ${isRoleSelected ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-600/50 cursor-not-allowed"}`}
+            className={`mt-4 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-sm active:scale-[0.99] ${
+              isRoleSelected
+                ? "bg-blue-600 hover:bg-blue-700"
+                : "bg-blue-600/50 cursor-not-allowed"
+            }`}
           >
             Continue with Google
           </button>
@@ -296,4 +346,3 @@ export default function Login() {
     </div>
   );
 }
-
