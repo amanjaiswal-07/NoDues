@@ -86,6 +86,13 @@ import HODHome from "./components/pages/HOD/HODHome.jsx";
 import HODPending from "./components/pages/HOD/HODPending.jsx";
 import HODApproved from "./components/pages/HOD/HODApproved.jsx";
 import HODRejected from "./components/pages/HOD/HODRejected.jsx";
+// student imports
+import StudentLayout from "./components/pages/student/StudentLayout.jsx";
+import StudentProfile from "./components/pages/student/StudentProfile.jsx";
+import StudentApply from "./components/pages/student/StudentApply.jsx";
+import StudentHistory from "./components/pages/student/StudentHistory.jsx";
+import StudentTrack from "./components/pages/student/StudentTrack.jsx";
+import StudentHome from "./components/pages/student/StudentHome.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -194,6 +201,14 @@ const router = createBrowserRouter(
         <Route path="pending" element={<HODPending />} />
         <Route path="approved" element={<HODApproved />} />
         <Route path="rejected" element={<HODRejected />} />
+      </Route>
+
+      <Route path="student" element={<StudentLayout />}>
+        <Route index element={<StudentHome />} />
+        <Route path="profile" element={<StudentProfile />} />
+        <Route path="apply" element={<StudentApply />} />
+        <Route path="track" element={<StudentTrack />} />
+        <Route path="history" element={<StudentHistory />} />
       </Route>
        
 

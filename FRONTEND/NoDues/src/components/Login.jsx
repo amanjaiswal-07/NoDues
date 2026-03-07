@@ -244,12 +244,25 @@ export default function Login() {
       navigate(`/hod/${hodDepartment}`);
       return;
     }
+    // Student special handling
+    if (role === "student") {
+      const email = mockEmail.trim().toLowerCase();
+
+      if (!email.endsWith("@lnmiit.ac.in")) {
+        alert("Student must login with LNMIIT email.");
+        return;
+      }
+
+      localStorage.setItem("studentEmail", email);
+      navigate("/student");
+      return;
+    }
     // Other departments
     navigate(`/${role}`);
   };
 
   const isRoleSelected = role !== "";
-  const shouldShowEmailInput = role === "library" || role === "hod";
+  const shouldShowEmailInput = role === "student" || role === "library" || role === "hod";
   const shouldShowLabDepartment = role === "labs";
 
   return (
