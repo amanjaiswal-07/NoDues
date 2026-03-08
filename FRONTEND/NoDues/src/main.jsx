@@ -93,6 +93,10 @@ import StudentApply from "./components/pages/student/StudentApply.jsx";
 import StudentHistory from "./components/pages/student/StudentHistory.jsx";
 import StudentTrack from "./components/pages/student/StudentTrack.jsx";
 import StudentHome from "./components/pages/student/StudentHome.jsx";
+// admin imports
+import AdminLayout from "./components/pages/admin/AdminLayout.jsx";
+import AdminHome from "./components/pages/admin/AdminHome.jsx";
+import AdminDepartmentAccess from "./components/pages/admin/AdminDepartmentAccess.jsx";
 // import Layout from "./Layout.jsx";
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -211,6 +215,18 @@ const router = createBrowserRouter(
         <Route path="history" element={<StudentHistory />} />
       </Route>
        
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<AdminHome />} />
+        <Route path="department-access" element={<AdminDepartmentAccess />} />
+        <Route
+          path="eligible-students"
+          element={<div className="text-white">Eligible Students page coming next.</div>}
+        />
+        <Route
+          path="applications"
+          element={<div className="text-white">Applications page coming next.</div>}
+        />
+      </Route>
 
     </Route>
   )
