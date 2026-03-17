@@ -1,3 +1,71 @@
+// import { useState } from "react";
+// import { useOutletContext } from "react-router-dom";
+
+// import RejectedRequests from "../../Request/RejectedRequests";
+// import ViewDetailsModal from "../../Modal/ViewDetailsModal";
+// import ConfirmModal from "../../Modal/ConfirmModal";
+
+// export default function PlacementRejected() {
+//   const { rejected, moveRejectedToApproved } = useOutletContext();
+
+//   const [viewOpen, setViewOpen] = useState(false);
+//   const [viewStudent, setViewStudent] = useState(null);
+
+//   // NEW: confirm modal for move-to-approved
+//   const [confirmOpen, setConfirmOpen] = useState(false);
+//   const [confirmStudent, setConfirmStudent] = useState(null);
+
+//   return (
+//     <>
+//       <RejectedRequests
+//         title="Placement Cell - Rejected Requests"
+//         data={rejected}
+//         onMoveToApproved={(s) => {
+//           setConfirmStudent(s);
+//           setConfirmOpen(true);
+//         }}
+//         onView={(s) => {
+//           setViewStudent(s);
+//           setViewOpen(true);
+//         }}
+//       />
+
+//       {/* NEW: Confirm before moving to approved */}
+//       <ConfirmModal
+//         open={confirmOpen}
+//         title="Move to Approved?"
+//         message={
+//           confirmStudent
+//             ? `Move ${confirmStudent.name} (${confirmStudent.roll}) to Approved?`
+//             : ""
+//         }
+//         confirmText="Yes, move"
+//         cancelText="Cancel"
+//         onClose={() => {
+//           setConfirmOpen(false);
+//           setConfirmStudent(null);
+//         }}
+//         onConfirm={() => {
+//           if (confirmStudent) moveRejectedToApproved(confirmStudent);
+//           setConfirmOpen(false);
+//           setConfirmStudent(null);
+//         }}
+//       />
+
+//       <ViewDetailsModal
+//         open={viewOpen}
+//         student={viewStudent}
+//         status="rejected"
+//         rejectionReason={viewStudent?.rejectionReason || ""}
+//         showPlacementFields={true}
+//         onClose={() => {
+//           setViewOpen(false);
+//           setViewStudent(null);
+//         }}
+//       />
+//     </>
+//   );
+// }
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
@@ -11,9 +79,11 @@ export default function PlacementRejected() {
   const [viewOpen, setViewOpen] = useState(false);
   const [viewStudent, setViewStudent] = useState(null);
 
-  // NEW: confirm modal for move-to-approved
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confirmStudent, setConfirmStudent] = useState(null);
+
+  const [bulkConfirmOpen, setBulkConfirmOpen] = useState(false);
+  const [bulkConfirmStudents, setBulkConfirmStudents] = useState([]);
 
   return (
     <>
@@ -24,19 +94,22 @@ export default function PlacementRejected() {
           setConfirmStudent(s);
           setConfirmOpen(true);
         }}
+        onMoveToApprovedSelected={(students) => {
+          setBulkConfirmStudents(students);
+          setBulkConfirmOpen(true);
+        }}
         onView={(s) => {
           setViewStudent(s);
           setViewOpen(true);
         }}
       />
 
-      {/* NEW: Confirm before moving to approved */}
       <ConfirmModal
         open={confirmOpen}
         title="Move to Approved?"
         message={
           confirmStudent
-            ? `Move ${confirmStudent.name} (${confirmStudent.roll}) to Approved?`
+            ? `Move ${confirmStudent.name} (${confirmStudent.roll}) to approved?`
             : ""
         }
         confirmText="Yes, move"
@@ -49,6 +122,29 @@ export default function PlacementRejected() {
           if (confirmStudent) moveRejectedToApproved(confirmStudent);
           setConfirmOpen(false);
           setConfirmStudent(null);
+        }}
+      />
+
+      <ConfirmModal
+        open={bulkConfirmOpen}
+        title="Approve Selected Rejected Requests?"
+        message={
+          bulkConfirmStudents.length > 0
+            ? `Move ${bulkConfirmStudents.length} selected students to approved?`
+            : ""
+        }
+        confirmText="Approve Selected"
+        cancelText="Cancel"
+        onClose={() => {
+          setBulkConfirmOpen(false);
+          setBulkConfirmStudents([]);
+        }}
+        onConfirm={() => {
+          bulkConfirmStudents.forEach((student) =>
+            moveRejectedToApproved(student)
+          );
+          setBulkConfirmOpen(false);
+          setBulkConfirmStudents([]);
         }}
       />
 
