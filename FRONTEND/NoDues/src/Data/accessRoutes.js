@@ -9,4 +9,5 @@ export const initialAccessList = [
   { id: 8, name: "HOD CSE", email: "hodcse@lnmiit.ac.in", route: "/hod/cse" },
   { id: 9, name: "Labs CSE CCE", email: "lab.csecce@lnmiit.ac.in", route: "/labs/cse-cce" },
   { id: 10, name: "Admin", email: "admin@lnmiit.ac.in", route: "/admin" },
+  { id: 11, name: "Warden", email: "warden@lnmiit.ac.in", route: "/warden" },
 ];
