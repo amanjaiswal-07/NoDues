@@ -121,6 +121,7 @@ export default function StoreRejected() {
         open={viewOpen}
         student={viewStudent}
         status="rejected"
+        currentDepartment="store"
         rejectionReason={viewStudent?.rejectionReason || ""}
         onClose={() => {
           setViewOpen(false);

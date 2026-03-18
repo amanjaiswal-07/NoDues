@@ -121,6 +121,7 @@ export default function NadRejected() {
         open={viewOpen}
         student={viewStudent}
         status="rejected"
+        currentDepartment="nad"
         rejectionReason={viewStudent?.rejectionReason || ""}
         onClose={() => {
           setViewOpen(false);

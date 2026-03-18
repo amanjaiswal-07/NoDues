@@ -246,6 +246,7 @@ export default function HODPending() {
         open={viewOpen}
         student={viewStudent}
         status="pending"
+        currentDepartment="hod"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

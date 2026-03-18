@@ -59,6 +59,7 @@ export default function NadApproved() {
         open={viewOpen}
         student={viewStudent}
         status="approved"
+        currentDepartment="nad"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

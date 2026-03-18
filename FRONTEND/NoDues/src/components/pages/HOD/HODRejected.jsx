@@ -148,6 +148,7 @@ export default function AdministrationRejected() {
         open={viewOpen}
         student={viewStudent}
         status="rejected"
+        currentDepartment="hod"
         rejectionReason={viewStudent?.rejectionReason || ""}
         onClose={() => {
           setViewOpen(false);

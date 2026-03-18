@@ -58,6 +58,7 @@ export default function AccountsApproved() {
         open={viewOpen}
         student={viewStudent}
         status="approved"
+        currentDepartment="accounts"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

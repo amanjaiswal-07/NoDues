@@ -75,6 +75,7 @@ export default function HODApproved() {
         open={viewOpen}
         student={viewStudent}
         status="approved"
+        currentDepartment="hod"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

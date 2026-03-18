@@ -186,6 +186,7 @@ export default function NadPending() {
         open={viewOpen}
         student={viewStudent}
         status="pending"
+        currentDepartment="nad"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

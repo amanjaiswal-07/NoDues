@@ -119,6 +119,7 @@ export default function AccountsRejected() {
         open={viewOpen}
         student={viewStudent}
         status="rejected"
+        currentDepartment="accounts"
         rejectionReason={viewStudent?.rejectionReason || ""}
         onClose={() => {
           setViewOpen(false);

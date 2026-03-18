@@ -184,6 +184,7 @@ export default function AccountsPending() {
         open={viewOpen}
         student={viewStudent}
         status="pending"
+        currentDepartment="accounts"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

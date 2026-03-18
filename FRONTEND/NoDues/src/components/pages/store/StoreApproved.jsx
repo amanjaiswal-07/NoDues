@@ -57,6 +57,7 @@ export default function StoreApproved() {
         open={viewOpen}
         student={viewStudent}
         status="approved"
+        currentDepartment="store"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);

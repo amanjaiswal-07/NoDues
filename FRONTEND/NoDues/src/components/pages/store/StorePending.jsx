@@ -182,6 +182,7 @@ export default function StorePending() {
         open={viewOpen}
         student={viewStudent}
         status="pending"
+        currentDepartment="store"
         onClose={() => {
           setViewOpen(false);
           setViewStudent(null);
